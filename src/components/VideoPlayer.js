@@ -105,53 +105,52 @@ export default function VideoPlayer() {
                     {moment.utc(progress * 1000).format("mm:ss")}
                   </p>
                 </Grid>
-                <Grid item>
-                  <div
-                    onMouseOver={() => setShowSlider(true)}
-                    onMouseOut={() => {
-                      const timeoutID = setTimeout(() => {
-                        if (!mouseOnSlider) {
-                          setShowSlider(false);
-                        }
-                      }, 1000);
-                      if (mouseOnSlider) {
-                        clearTimeout(timeoutID);
+                <Grid
+                  item
+                  onMouseOver={() => setShowSlider(true)}
+                  onMouseOut={() => {
+                    const timeoutID = setTimeout(() => {
+                      if (!mouseOnSlider) {
+                        setShowSlider(false);
                       }
-                    }}
-                  >
-                    {showSlider ? (
-                      <Slider
-                        onMouseOver={() => setMouseOnSlider(true)}
-                        onMouseOut={() => {
-                          setMouseOnSlider(false);
-                          setShowSlider(false);
-                        }}
-                        color="secondary"
-                        aria-label="Volume"
-                        orientation="vertical"
-                        valueLabelDisplay="auto"
-                        value={volume}
-                        onChange={handleVolumeChange}
-                        sx={{
-                          height: 100,
-                          position: "absolute",
-                          bottom: 60,
-                          right: 35,
-                        }}
-                        min={0}
-                        step={0.1}
-                        max={1}
-                      />
-                    ) : (
-                      ""
-                    )}
+                    }, 1000);
+                    if (mouseOnSlider) {
+                      clearTimeout(timeoutID);
+                    }
+                  }}
+                >
+                  {showSlider ? (
+                    <Slider
+                      onMouseOver={() => setMouseOnSlider(true)}
+                      onMouseOut={() => {
+                        setMouseOnSlider(false);
+                        setShowSlider(false);
+                      }}
+                      color="secondary"
+                      aria-label="Volume"
+                      orientation="vertical"
+                      valueLabelDisplay="auto"
+                      value={volume}
+                      onChange={handleVolumeChange}
+                      sx={{
+                        height: 100,
+                        position: "absolute",
+                        bottom: 60,
+                        right: 35,
+                      }}
+                      min={0}
+                      step={0.1}
+                      max={1}
+                    />
+                  ) : (
+                    ""
+                  )}
 
-                    {isPlaying && volume > 0 ? (
-                      <AnimatedWaves />
-                    ) : (
-                      <StaticWaves />
-                    )}
-                  </div>
+                  {isPlaying && volume > 0 ? (
+                    <AnimatedWaves />
+                  ) : (
+                    <StaticWaves />
+                  )}
                 </Grid>
               </Grid>
             </Grid>
