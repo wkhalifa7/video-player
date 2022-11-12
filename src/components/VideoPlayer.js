@@ -1,5 +1,3 @@
-import "./VideoPlayer.css";
-
 import { React, useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -11,6 +9,8 @@ import StaticWaves from "./components/StaticWaves";
 import PlayIcon from "./components/Icons/PlayIcon";
 import PauseIcon from "./components/Icons/PauseIcon";
 import Slider from "@mui/material/Slider";
+
+import "./VideoPlayer.css";
 
 export default function VideoPlayer() {
   const url =

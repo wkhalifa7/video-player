@@ -1,6 +1,6 @@
-import "./Waves.css";
-
 import React from "react";
+
+import "./Waves.css";
 
 export default function StaticWaves() {
   return (
