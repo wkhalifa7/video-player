@@ -1,0 +1,29 @@
+.root {
+  height: fit-content;
+  /* background-color: rgb(196, 197, 197); */
+}
+
+.monitor {
+  position: relative;
+  width: 80%;
+  clip-path: polygon(50% 0, 100% 2%, 100% 98%, 50% 100%, 0 98%, 0 2%);
+}
+
+video {
+  border-radius: 6%;
+}
+
+.controls {
+  position: absolute;
+  bottom: 1.5vw;
+}
+
+.time {
+  font-size: 1vw;
+  text-shadow: 0.066vw 0.066vw #000;
+  color: white;
+}
+
+.margin {
+  margin: 0 1.32vw !important;
+}
