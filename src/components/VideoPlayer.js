@@ -16,6 +16,7 @@ export default function VideoPlayer() {
   const url =
     "https://tractive.com/assets/static/videos/ActivityMonitoring_15s_EN.mp4";
 
+  const [isReady, setIsReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -38,14 +39,6 @@ export default function VideoPlayer() {
     }
   }, [duration, progress]);
 
-  // useEffect(() => {
-  // if (showSlider) {
-  //   setTimeout(() => {
-  //     setShowSlider(false);
-  //   }, 2000);
-  // }
-  // }, [showSlider]);
-
   return (
     <Grid
       container
@@ -55,7 +48,6 @@ export default function VideoPlayer() {
       className="root"
     >
       {/* Video Player section */}
-
       <Grid item className="monitor">
         <ReactPlayer
           playing={isPlaying}
@@ -63,99 +55,108 @@ export default function VideoPlayer() {
           volume={volume}
           width="100%"
           height="100%"
-          fallback={<CircularProgress />}
-          onReady={() => console.log("Ready")}
+          onReady={() => setIsReady(true)}
           onDuration={(duration) => setDuration(Math.floor(duration))}
           onProgress={(progress) =>
             isPlaying && setProgress(Math.floor(progress.playedSeconds))
           }
         />
 
-        {/* Controls section */}
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          className="controls"
-        >
-          <Grid item className="margin">
-            <IconButton
-              aria-label="play/pause"
-              style={{
-                backgroundColor: "grey",
-              }}
-              onClick={handleToggleButton}
-            >
-              {isPlaying ? <PauseIcon /> : <PlayIcon />}
-            </IconButton>
+        {!isReady ? (
+          // show loader on loading url
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <CircularProgress />
           </Grid>
-          <Grid item className="margin">
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              spacing={2}
-            >
-              <Grid item>
-                <p className="time">
-                  {moment.utc(progress * 1000).format("mm:ss")}
-                </p>
-              </Grid>
-              <Grid item>
-                <div
-                  onMouseOver={() => setShowSlider(true)}
-                  onMouseOut={() => {
-                    const timeoutID = setTimeout(() => {
-                      if (!mouseOnSlider) {
-                        setShowSlider(false);
+        ) : (
+          // Controls section
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            className="controls"
+          >
+            <Grid item className="margin">
+              <IconButton
+                aria-label="play/pause"
+                style={{
+                  backgroundColor: "grey",
+                }}
+                onClick={handleToggleButton}
+              >
+                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+              </IconButton>
+            </Grid>
+            <Grid item className="margin">
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+              >
+                <Grid item>
+                  <p className="time">
+                    {moment.utc(progress * 1000).format("mm:ss")}
+                  </p>
+                </Grid>
+                <Grid item>
+                  <div
+                    onMouseOver={() => setShowSlider(true)}
+                    onMouseOut={() => {
+                      const timeoutID = setTimeout(() => {
+                        if (!mouseOnSlider) {
+                          setShowSlider(false);
+                        }
+                      }, 1000);
+                      if (mouseOnSlider) {
+                        clearTimeout(timeoutID);
                       }
-                    }, 1000);
-                    if (mouseOnSlider) {
-                      clearTimeout(timeoutID);
-                    }
-                  }}
-                >
-                  {showSlider ? (
-                    <Slider
-                      onMouseOver={() => setMouseOnSlider(true)}
-                      onMouseOut={() => {
-                        // setTimeout(() => {
-                        setMouseOnSlider(false);
-                        setShowSlider(false);
-                        // }, 2000);
-                      }}
-                      color="secondary"
-                      aria-label="Volume"
-                      orientation="vertical"
-                      valueLabelDisplay="auto"
-                      value={volume}
-                      onChange={handleVolumeChange}
-                      sx={{
-                        height: 100,
-                        position: "absolute",
-                        bottom: 60,
-                        right: 35,
-                      }}
-                      min={0}
-                      step={0.1}
-                      max={1}
-                    />
-                  ) : (
-                    ""
-                  )}
+                    }}
+                  >
+                    {showSlider ? (
+                      <Slider
+                        onMouseOver={() => setMouseOnSlider(true)}
+                        onMouseOut={() => {
+                          setMouseOnSlider(false);
+                          setShowSlider(false);
+                        }}
+                        color="secondary"
+                        aria-label="Volume"
+                        orientation="vertical"
+                        valueLabelDisplay="auto"
+                        value={volume}
+                        onChange={handleVolumeChange}
+                        sx={{
+                          height: 100,
+                          position: "absolute",
+                          bottom: 60,
+                          right: 35,
+                        }}
+                        min={0}
+                        step={0.1}
+                        max={1}
+                      />
+                    ) : (
+                      ""
+                    )}
 
-                  {isPlaying && volume > 0 ? (
-                    <AnimatedWaves />
-                  ) : (
-                    <StaticWaves />
-                  )}
-                </div>
+                    {isPlaying && volume > 0 ? (
+                      <AnimatedWaves />
+                    ) : (
+                      <StaticWaves />
+                    )}
+                  </div>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        )}
       </Grid>
     </Grid>
   );
