@@ -1,4 +1,4 @@
-import VideoPlayer from "./screens/VideoPlayer";
+import VideoPlayer from "./components/VideoPlayer";
 
 function App() {
   return <VideoPlayer />;

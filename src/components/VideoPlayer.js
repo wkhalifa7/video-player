@@ -4,10 +4,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ReactPlayer from "react-player/file";
 import moment from "moment";
 import Grid from "@mui/material/Grid";
-import AnimatedWaves from "../components/AnimatedWaves";
-import StaticWaves from "../components/StaticWaves";
-import PlayIcon from "../components/Icons/PlayIcon";
-import PauseIcon from "../components/Icons/PauseIcon";
+import AnimatedWaves from "./components/AnimatedWaves";
+import StaticWaves from "./components/StaticWaves";
+import PlayIcon from "./components/Icons/PlayIcon";
+import PauseIcon from "./components/Icons/PauseIcon";
 import Slider from "@mui/material/Slider";
 
 import "./VideoPlayer.css";
