@@ -63,7 +63,7 @@ export default function VideoPlayer() {
         />
 
         {!isReady ? (
-          // show loader on loading url
+          // show loader when the url still loading
           <Grid
             container
             direction="row"
@@ -81,6 +81,7 @@ export default function VideoPlayer() {
             alignItems="center"
             className="controls"
           >
+            {/* Play/Pause Button */}
             <Grid item className="margin">
               <IconButton
                 aria-label="play/pause"
@@ -100,11 +101,14 @@ export default function VideoPlayer() {
                 alignItems="center"
                 spacing={2}
               >
+                {/* Timer */}
                 <Grid item>
                   <p className="time">
                     {moment.utc(progress * 1000).format("mm:ss")}
                   </p>
                 </Grid>
+
+                {/* Volume Slider */}
                 <Grid
                   item
                   onMouseOver={() => setShowSlider(true)}
@@ -147,6 +151,7 @@ export default function VideoPlayer() {
                     ""
                   )}
 
+                  {/* Animated/Static Waves */}
                   {isPlaying && volume > 0 ? (
                     <AnimatedWaves />
                   ) : (
