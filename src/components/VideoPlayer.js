@@ -133,10 +133,11 @@ export default function VideoPlayer() {
                       value={volume}
                       onChange={handleVolumeChange}
                       sx={{
-                        height: 100,
+                        height: "6.615vw",
                         position: "absolute",
-                        bottom: 60,
-                        right: 35,
+                        width: "0.4vw",
+                        bottom: "3.968vw",
+                        right: "1.9vw",
                       }}
                       min={0}
                       step={0.1}
